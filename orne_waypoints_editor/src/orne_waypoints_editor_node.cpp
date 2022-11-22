@@ -218,19 +218,11 @@ public:
         int wp_num = std::stoi(feedback->marker_name);
         waypoints_.erase(waypoints_.begin() + wp_num);
         for (int i=wp_num; i<waypoints_.size(); i++) {
-<<<<<<< HEAD
             geometry_msgs::Pose wp;
             wp.position.x = waypoints_.at(i).position.x;
             wp.position.y = waypoints_.at(i).position.y;
             wp.position.z = waypoints_.at(i).position.z;
             server->setPose(std::to_string(i), wp);
-=======
-            geometry_msgs::Pose p;
-            p.position.x = waypoints_.at(i).position.x;
-            p.position.y = waypoints_.at(i).position.y;
-            p.position.z = waypoints_.at(i).position.z;
-            server->setPose(std::to_string(i), p);
->>>>>>> 29f25d4d4afa289bcd5a19c0d01937e47cef9784
         }
         server->erase(std::to_string((int)waypoints_.size()));
         makeWpsInteractiveMarker();
