@@ -131,6 +131,7 @@ public:
         wp_menu_handler_.insert(wp_action_menu_handler, "Charge", boost::bind(&WaypointsEditor::actionCb, this, _1)); //11 ->7
         wp_menu_handler_.insert(wp_action_menu_handler, "Stop", boost::bind(&WaypointsEditor::actionCb, this, _1)); //8
         wp_menu_handler_.insert(wp_action_menu_handler, "P2P", boost::bind(&WaypointsEditor::actionCb, this, _1)); //9
+        wp_menu_handler_.insert(wp_action_menu_handler, "Align", boost::bind(&WaypointsEditor::actionCb, this, _1)); //10
         interactive_markers::MenuHandler::EntryHandle voice_menu_handler = wp_menu_handler_.insert(wp_action_menu_handler, "Speak", boost::bind(&WaypointsEditor::actionCb, this, _1)); //10
 
         //set wav file
@@ -186,6 +187,10 @@ public:
             waypoints_.at(wp_num).position.action = "p2p";
             waypoints_.at(wp_num).position.duration = INT_MAX;
             waypoints_.at(wp_num).position.file = "none";
+        }else if(feedback->menu_entry_id == 10){
+            waypoints_.at(wp_num).position.action = "align";
+            waypoints_.at(wp_num).position.duration = INT_MAX;
+            waypoints_.at(wp_num).position.file = "none";
         }
 
         makeWpsInteractiveMarker();
@@ -221,10 +226,10 @@ public:
         int wp_num = std::stoi(feedback->marker_name);
         waypoints_.erase(waypoints_.begin() + wp_num);
         for (int i=wp_num; i<waypoints_.size(); i++) {
-            geometry_msgs::Pose p;
-            p.position.x = waypoints_.at(i).position.x;
-            p.position.y = waypoints_.at(i).position.y;
-            p.position.z = waypoints_.at(i).position.z;
+            geometry_msgs::Pose wp;
+            wp.position.x = waypoints_.at(i).position.x;
+            wp.position.y = waypoints_.at(i).position.y;
+            wp.position.z = waypoints_.at(i).position.z;
             server->setPose(std::to_string(i), wp);
         }
         server->erase(std::to_string((int)waypoints_.size()));
@@ -375,6 +380,15 @@ public:
             marker.color.g = 0.3;
             marker.color.b = 0.8;
             marker.color.a = 0.1;
+        }else if (action=="align"){
+            marker.type = Marker::ARROW;
+            marker.scale.x = 0.7;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+            marker.color.r = 0.3;
+            marker.color.g = 0.6;
+            marker.color.b = 1.0;
+            marker.color.a = 0.5;
         } else{
             marker.type = Marker::SPHERE;
             marker.scale.x = 0.5;
@@ -396,7 +410,7 @@ public:
         control.orientation.x = 0;
         control.orientation.y = 1;
         control.orientation.z = 0;
-        if(action=="charge" || action=="stop" || action=="speak")
+        if(action=="charge" || action=="stop" || action=="speak" || action=="align")
             control.interaction_mode = InteractiveMarkerControl::MOVE_ROTATE;
         else
             control.interaction_mode = InteractiveMarkerControl::MOVE_PLANE;

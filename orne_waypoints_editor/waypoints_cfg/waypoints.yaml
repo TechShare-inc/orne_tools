@@ -1,30 +1,44 @@
 waypoints:
     - point:
         pose:
-            x: 0.58111
-            y: -0.958097
-            z: -0.000262498
+            x: -3.06416
+            y: 1.76484
+            z: 0.107059
         action:
             a: passthrough
-            d: 5
-            f: mg400
+            d: 0
+            f: none
         orientation:
             x: 0
             y: 0
             z: 0
-            w: 0
+            w: 1
+    - point:
+        pose:
+            x: -0.77708
+            y: 2.14208
+            z: 0.0823191
+        action:
+            a: align
+            d: 2147483647
+            f: none
+        orientation:
+            x: 2.48976e-06
+            y: 1.13768e-06
+            z: 0.212829
+            w: 0.977101
 finish_pose:
     header:
-        seq: 2
-        stamp: 1655972045.699442278
-        frame_id: map
+        seq: 0
+        stamp: 0.000000000
+        frame_id: 
     pose:
         position:
-            x: -1.0267
-            y: -0.196292
-            z: -0.000138497
+            x: -3.12008
+            y: 1.95906
+            z: 0.000155147
         orientation:
-            x: 7.90389e-06
-            y: -2.27083e-05
-            z: -0.989098
-            w: -0.147272
+            x: 9.83963e-07
+            y: -9.16681e-06
+            z: 0.390725
+            w: -0.920513
