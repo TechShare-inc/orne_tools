@@ -192,7 +192,7 @@ public:
             waypoints_.at(wp_num).position.file = "none";
         }else if(feedback->menu_entry_id == 10){
             waypoints_.at(wp_num).position.action = "align";
-            waypoints_.at(wp_num).position.duration = INT_MAX;
+            waypoints_.at(wp_num).position.duration = 0;
             waypoints_.at(wp_num).position.file = "none";
         }
 
