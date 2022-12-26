@@ -1,32 +1,102 @@
 waypoints:
     - point:
         pose:
-            x: 1.26837
-            y: 2.39
-            z: 0.00633671
+            x: -0.0738127
+            y: -0.905633
+            z: 0.00732073
         action:
-            a: align
+            a: passthrough
             d: 0
             f: none
         orientation:
-            x: 1.04259e-05
-            y: -1.77856e-05
-            z: 0.713922
-            w: 0.70024
+            x: 0
+            y: 0
+            z: 0
+            w: 1
     - point:
         pose:
-            x: 2.54046
-            y: -0.202559
-            z: 0.166403
+            x: 0.0544619
+            y: 0.135706
+            z: 0.00407828
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: 0
+            y: 0
+            z: 0
+            w: 1
+    - point:
+        pose:
+            x: -0.568075
+            y: 0.442571
+            z: 0.00356919
         action:
             a: align
             d: 0
             f: none
         orientation:
-            x: -5.97831e-06
-            y: -7.80998e-06
-            z: -0.656676
-            w: 0.754173
+            x: -1.84307e-05
+            y: -5.44159e-06
+            z: 0.99726
+            w: -0.0740198
+    - point:
+        pose:
+            x: -1.79768
+            y: 0.560107
+            z: 0.00436051
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: 0
+            y: 0
+            z: 0
+            w: 1
+    - point:
+        pose:
+            x: -2.55427
+            y: 0.302859
+            z: 0.00351834
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: 0
+            y: 0
+            z: 0
+            w: 1
+    - point:
+        pose:
+            x: -2.71399
+            y: -0.390359
+            z: 0.0085713
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: 0
+            y: 0
+            z: 0
+            w: 1
+    - point:
+        pose:
+            x: -2.59289
+            y: -0.799246
+            z: 0.00459105
+        action:
+            a: align
+            d: 0
+            f: none
+        orientation:
+            x: 5.77058e-06
+            y: -2.45275e-06
+            z: -0.0431151
+            w: -0.999077
 finish_pose:
     header:
         seq: 0
@@ -34,11 +104,11 @@ finish_pose:
         frame_id: 
     pose:
         position:
-            x: 2.22696
-            y: 1.22346
-            z: 0.0131158
+            x: -1.45441
+            y: -1.43835
+            z: -9.95355e-06
         orientation:
-            x: -0.000485496
-            y: -0.00103085
-            z: 0.599697
-            w: 0.800228
+            x: -1.25321e-06
+            y: 1.20632e-05
+            z: -0.0758737
+            w: -0.997122
