@@ -42,7 +42,6 @@ public:
         ros::NodeHandle private_nh("~");
         private_nh.param("world_frame", world_frame_, std::string("map"));
         private_nh.param("robot_frame", robot_frame_, std::string("base_link"));
-        private_nh.param("voice_path", voice_path_, std::string(""));
         private_nh.param("save_joy_button", save_joy_button_, 0);
 
         server.reset(new interactive_markers::InteractiveMarkerServer("waypoints_marker_server", "", false));
@@ -75,24 +74,6 @@ public:
 
     ~WaypointsEditor(){
         server.reset();
-    }
-
-    void readVoiceFiles(){
-        struct dirent *entry = nullptr;
-        DIR *dp = nullptr;
-        std::string delimiter = ".";
-        dp = opendir(voice_path_.c_str());
-        if (dp != nullptr) {
-            while ((entry = readdir(dp))){
-                std::string str = entry->d_name;
-                if (str.find("wav") != std::string::npos){
-                    std::string token = str.substr(0, str.find(delimiter));
-                    voice_names_.push_back(token);
-                }
-            }
-            std::sort(voice_names_.begin(), voice_names_.end());
-        }
-        closedir(dp);
     }
 
     void processFeedback( const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback ){
@@ -139,7 +120,6 @@ public:
     }
 
     void initMenu(){
-        readVoiceFiles();
         interactive_markers::MenuHandler::EntryHandle wp_delete_menu_handler = wp_menu_handler_.insert("delete", boost::bind(&WaypointsEditor::wpDeleteCb, this, _1)); //3
         interactive_markers::MenuHandler::EntryHandle wp_insert_menu_handler = wp_menu_handler_.insert("Insert");
         interactive_markers::MenuHandler::EntryHandle wp_action_menu_handler = wp_menu_handler_.insert("setAction");
@@ -150,20 +130,8 @@ public:
 
         //set action
         interactive_markers::MenuHandler::EntryHandle action_mode = wp_menu_handler_.insert(wp_action_menu_handler, "Pass Through", boost::bind(&WaypointsEditor::actionCb, this, _1)); //6
-        wp_menu_handler_.insert(wp_action_menu_handler, "Charge", boost::bind(&WaypointsEditor::actionCb, this, _1)); //11 ->7
-        wp_menu_handler_.insert(wp_action_menu_handler, "Stop", boost::bind(&WaypointsEditor::actionCb, this, _1)); //8
-        wp_menu_handler_.insert(wp_action_menu_handler, "P2P", boost::bind(&WaypointsEditor::actionCb, this, _1)); //9
-        wp_menu_handler_.insert(wp_action_menu_handler, "Align1", boost::bind(&WaypointsEditor::actionCb, this, _1)); //10
-        wp_menu_handler_.insert(wp_action_menu_handler, "Align2", boost::bind(&WaypointsEditor::actionCb, this, _1)); //11
-        interactive_markers::MenuHandler::EntryHandle voice_menu_handler = wp_menu_handler_.insert(wp_action_menu_handler, "Speak", boost::bind(&WaypointsEditor::actionCb, this, _1)); //10
-
-        //set wav file
-        if(!voice_names_.empty()){
-            interactive_markers::MenuHandler::EntryHandle specific_mode = wp_menu_handler_.insert(voice_menu_handler, voice_names_[0], boost::bind(&WaypointsEditor::setExplanation, this, _1)); //11
-            for (int i=1; i<voice_names_.size();i++){
-                wp_menu_handler_.insert(voice_menu_handler, voice_names_[i], boost::bind(&WaypointsEditor::setExplanation, this, _1)); 
-            }
-        }
+        wp_menu_handler_.insert(wp_action_menu_handler, "Align1", boost::bind(&WaypointsEditor::actionCb, this, _1)); //7
+        wp_menu_handler_.insert(wp_action_menu_handler, "Align2", boost::bind(&WaypointsEditor::actionCb, this, _1)); //8
     }
 
     void actionCb(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback){
@@ -177,25 +145,10 @@ public:
             waypoints_.at(wp_num).position.duration = 0;
             waypoints_.at(wp_num).position.file = "none";
         }else if(feedback->menu_entry_id == 7){
-            ROS_INFO_STREAM("Charge");
-            waypoints_.at(wp_num).position.action = "charge";
-            waypoints_.at(wp_num).position.duration = 5;
-            waypoints_.at(wp_num).position.file = "none";
-        }else if(feedback->menu_entry_id == 8){
-            ROS_INFO_STREAM("Stop");
-            waypoints_.at(wp_num).position.action = "stop";
-            waypoints_.at(wp_num).position.duration = INT_MAX;
-            waypoints_.at(wp_num).position.file = "none";
-        }else if(feedback->menu_entry_id == 9){
-            ROS_INFO_STREAM("P2P");
-            waypoints_.at(wp_num).position.action = "p2p";
-            waypoints_.at(wp_num).position.duration = INT_MAX;
-            waypoints_.at(wp_num).position.file = "none";
-        }else if(feedback->menu_entry_id == 10){
             waypoints_.at(wp_num).position.action = "align1";
             waypoints_.at(wp_num).position.duration = INT_MAX;
             waypoints_.at(wp_num).position.file = "none";
-        }else if(feedback->menu_entry_id == 11){
+        }else if(feedback->menu_entry_id == 8){
             waypoints_.at(wp_num).position.action = "align2";
             waypoints_.at(wp_num).position.duration = INT_MAX;
             waypoints_.at(wp_num).position.file = "none";
@@ -204,18 +157,6 @@ public:
         makeWpsInteractiveMarker();
         server->applyChanges();
     }
-
-    void setExplanation(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback){
-        ROS_INFO_STREAM("menu_entry_id : " << feedback->menu_entry_id);
-        int wp_num= std::stoi(feedback->marker_name);
-        waypoints_.at(wp_num).position.action = "speak";
-        waypoints_.at(wp_num).position.duration = INT_MAX;
-        ROS_INFO_STREAM(voice_names_[feedback->menu_entry_id-11]); //11 is the first index of menu_entry_if for speech
-        waypoints_.at(wp_num).position.file = voice_names_[feedback->menu_entry_id-11];        
-        makeWpsInteractiveMarker();
-        server->applyChanges();
-    }
-    
 
 
     void wpDeleteCb(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback){
@@ -268,7 +209,6 @@ public:
             p.position.z = waypoints_.at(i).position.z;
             server->setPose(std::to_string(i), p);
         }
-        // makeWpInteractiveMarker(std::to_string(waypoints_.size()-1), waypoints_.at(waypoints_.size()-1));
         makeWpsInteractiveMarker();
         server->applyChanges();
     }
@@ -286,8 +226,6 @@ public:
             Marker marker;
             marker.type = Marker::TEXT_VIEW_FACING;
             marker.text = std::to_string(i) +":" +waypoints_.at(i).position.action;
-            if (waypoints_.at(i).position.action == "speak")
-                marker.text += ": " + waypoints_.at(i).position.file;
             marker.header.frame_id = world_frame_;
             marker.header.stamp = ros::Time(0);
             std::stringstream name;
@@ -335,49 +273,8 @@ public:
 
     Marker makeWpMarker(const std::string &action){
         Marker marker;
-        
-//         marker.scale.x = 0.8;
-//         marker.scale.y = 0.8;
-//         marker.scale.z = 0.8;
 
-        if(action=="charge"){
-            // marker.type = Marker::CUBE;
-            marker.type = Marker::ARROW;
-            marker.scale.x = 0.7;
-            marker.scale.y = 0.2;
-            marker.scale.z = 0.2;
-            marker.color.r = 2.0;
-            marker.color.g = 0.5;
-            marker.color.b = 0.8;
-            marker.color.a = 0.5;
-        }else if (action=="stop"){
-            marker.type = Marker::ARROW;
-            marker.scale.x = 0.7;
-            marker.scale.y = 0.2;
-            marker.scale.z = 0.2;
-            marker.color.r = 0.3;
-            marker.color.g = 1.0;
-            marker.color.b = 0.8;
-            marker.color.a = 0.5;
-        }else if (action=="speak"){
-            marker.type = Marker::ARROW;
-            marker.scale.x = 0.7;
-            marker.scale.y = 0.2;
-            marker.scale.z = 0.2;
-            marker.color.r = 0.3;
-            marker.color.g = 0.6;
-            marker.color.b = 1.0;
-            marker.color.a = 0.5;
-        }else if (action=="p2p"){
-            marker.type = Marker::SPHERE;
-            marker.scale.x = 0.5;
-            marker.scale.y = 0.5;
-            marker.scale.z = 0.5;
-            marker.color.r = 0.3;
-            marker.color.g = 0.3;
-            marker.color.b = 0.8;
-            marker.color.a = 0.1;
-        }else if (action=="align1"){
+        if (action=="align1"){
             marker.type = Marker::ARROW;
             marker.scale.x = 0.7;
             marker.scale.y = 0.2;
@@ -416,7 +313,7 @@ public:
         control.orientation.x = 0;
         control.orientation.y = 1;
         control.orientation.z = 0;
-        if(action=="charge" || action=="stop" || action=="speak" || action=="align1" || action=="align2")
+        if(action=="align1" || action=="align2")
             control.interaction_mode = InteractiveMarkerControl::MOVE_ROTATE;
         else
             control.interaction_mode = InteractiveMarkerControl::MOVE_PLANE;
@@ -706,9 +603,7 @@ private:
     std::string filename_;
     std::string world_frame_;
     std::string robot_frame_;
-    std::string voice_path_;
     ros::ServiceServer save_server_;
-    std::vector<std::string> voice_names_; 
     bool fp_flag_;
     ros::Rate rate_;
 
