@@ -132,6 +132,9 @@ public:
         interactive_markers::MenuHandler::EntryHandle action_mode = wp_menu_handler_.insert(wp_action_menu_handler, "Pass Through", boost::bind(&WaypointsEditor::actionCb, this, _1)); //6
         wp_menu_handler_.insert(wp_action_menu_handler, "Align1", boost::bind(&WaypointsEditor::actionCb, this, _1)); //7
         wp_menu_handler_.insert(wp_action_menu_handler, "Align2", boost::bind(&WaypointsEditor::actionCb, this, _1)); //8
+        wp_menu_handler_.insert(wp_action_menu_handler, "start", boost::bind(&WaypointsEditor::actionCb, this, _1)); //9
+        wp_menu_handler_.insert(wp_action_menu_handler, "pass", boost::bind(&WaypointsEditor::actionCb, this, _1)); //10
+        wp_menu_handler_.insert(wp_action_menu_handler, "end", boost::bind(&WaypointsEditor::actionCb, this, _1)); //11
     }
 
     void actionCb(const visualization_msgs::InteractiveMarkerFeedbackConstPtr &feedback){
@@ -150,6 +153,18 @@ public:
             waypoints_.at(wp_num).position.file = "none";
         }else if(feedback->menu_entry_id == 8){
             waypoints_.at(wp_num).position.action = "align2";
+            waypoints_.at(wp_num).position.duration = INT_MAX;
+            waypoints_.at(wp_num).position.file = "none";
+        }else if(feedback->menu_entry_id == 9){
+            waypoints_.at(wp_num).position.action = "start";
+            waypoints_.at(wp_num).position.duration = INT_MAX;
+            waypoints_.at(wp_num).position.file = "none";
+        }else if(feedback->menu_entry_id == 10){
+            waypoints_.at(wp_num).position.action = "pass";
+            waypoints_.at(wp_num).position.duration = INT_MAX;
+            waypoints_.at(wp_num).position.file = "none";
+        }else if(feedback->menu_entry_id == 11){
+            waypoints_.at(wp_num).position.action = "end";
             waypoints_.at(wp_num).position.duration = INT_MAX;
             waypoints_.at(wp_num).position.file = "none";
         }
@@ -292,6 +307,33 @@ public:
             marker.color.g = 0.6;
             marker.color.b = 1.0;
             marker.color.a = 0.5;
+        }else if (action=="start"){
+            marker.type = Marker::ARROW;
+            marker.scale.x = 0.7;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+            marker.color.r = 0.3;
+            marker.color.g = 0.6;
+            marker.color.b = 0.5;
+            marker.color.a = 1.0;
+        }else if (action=="pass"){
+            marker.type = Marker::ARROW;
+            marker.scale.x = 0.7;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+            marker.color.r = 0.3;
+            marker.color.g = 1.0;
+            marker.color.b = 0.6;
+            marker.color.a = 0.5;
+        }else if (action=="end"){
+            marker.type = Marker::ARROW;
+            marker.scale.x = 0.7;
+            marker.scale.y = 0.2;
+            marker.scale.z = 0.2;
+            marker.color.r = 0.3;
+            marker.color.g = 0.5;
+            marker.color.b = 1.0;
+            marker.color.a = 0.6;
         } else{
             marker.type = Marker::SPHERE;
             marker.scale.x = 0.5;
@@ -313,7 +355,7 @@ public:
         control.orientation.x = 0;
         control.orientation.y = 1;
         control.orientation.z = 0;
-        if(action=="align1" || action=="align2")
+        if(action=="align1" || action=="align2" || action=="start" || action=="pass" || action=="end")
             control.interaction_mode = InteractiveMarkerControl::MOVE_ROTATE;
         else
             control.interaction_mode = InteractiveMarkerControl::MOVE_PLANE;
