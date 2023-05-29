@@ -1,9 +1,9 @@
 waypoints:
     - point:
         pose:
-            x: 1.19842
-            y: -0.545982
-            z: 0.00259888
+            x: 1.18743
+            y: -0.368777
+            z: 0.00259945
         action:
             a: passthrough
             d: 0
@@ -15,9 +15,9 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: 2.2259
-            y: -0.103126
-            z: -0.000418976
+            x: 2.5217
+            y: 0.0212628
+            z: 0.00259958
         action:
             a: passthrough
             d: 0
@@ -29,23 +29,23 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: 2.19543
-            y: 0.633371
-            z: -0.000426015
+            x: 2.28757
+            y: 0.411993
+            z: -0.000423743
         action:
-            a: passthrough
-            d: 0
+            a: start
+            d: 2147483647
             f: none
         orientation:
-            x: -1.91068e-06
-            y: -3.66263e-06
-            z: 0.80244
-            w: 0.596741
+            x: -1.0835e-05
+            y: -4.62783e-06
+            z: 0.839696
+            w: 0.543057
     - point:
         pose:
-            x: 1.55064
-            y: 1.94867
-            z: 0.00342169
+            x: 1.61077
+            y: 1.82059
+            z: 0.00342175
         action:
             a: passthrough
             d: 0
@@ -57,9 +57,9 @@ waypoints:
             w: -0.529035
     - point:
         pose:
-            x: 0.747039
-            y: 1.63616
-            z: 0.00295074
+            x: 0.344607
+            y: 1.47741
+            z: 0.0034217
         action:
             a: passthrough
             d: 0
@@ -71,18 +71,18 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: 0.656044
-            y: 0.855397
-            z: 0.000845153
+            x: 0.564752
+            y: 0.981813
+            z: 0.000849024
         action:
             a: end
             d: 2147483647
             f: none
         orientation:
-            x: 2.73349e-06
-            y: 9.70329e-06
-            z: -0.606099
-            w: 0.795392
+            x: 2.10583e-06
+            y: -7.22463e-06
+            z: 0.560997
+            w: -0.827818
 finish_pose:
     header:
         seq: 0
