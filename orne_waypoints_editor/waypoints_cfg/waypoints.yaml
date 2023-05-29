@@ -1,12 +1,12 @@
 waypoints:
     - point:
         pose:
-            x: 0.166733
-            y: -0.065906
-            z: -0.000243262
+            x: 1.19842
+            y: -0.545982
+            z: 0.00259888
         action:
-            a: start
-            d: 2147483647
+            a: passthrough
+            d: 0
             f: none
         orientation:
             x: 0
@@ -15,74 +15,74 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: 1.10744
-            y: 0.194241
-            z: 0.000372332
+            x: 2.2259
+            y: -0.103126
+            z: -0.000418976
         action:
-            a: pass
-            d: 2147483647
+            a: passthrough
+            d: 0
             f: none
         orientation:
-            x: 7.26193e-07
-            y: -1.04063e-06
-            z: 0.697533
-            w: 0.716554
+            x: 0
+            y: 0
+            z: 0
+            w: 1
     - point:
         pose:
-            x: 1.02368
-            y: 1.32114
-            z: -0.00052835
+            x: 2.19543
+            y: 0.633371
+            z: -0.000426015
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: -1.91068e-06
+            y: -3.66263e-06
+            z: 0.80244
+            w: 0.596741
+    - point:
+        pose:
+            x: 1.55064
+            y: 1.94867
+            z: 0.00342169
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: 1.90496e-06
+            y: 1.22304e-06
+            z: -0.8486
+            w: -0.529035
+    - point:
+        pose:
+            x: 0.747039
+            y: 1.63616
+            z: 0.00295074
+        action:
+            a: passthrough
+            d: 0
+            f: none
+        orientation:
+            x: 0
+            y: 0
+            z: 0
+            w: 1
+    - point:
+        pose:
+            x: 0.656044
+            y: 0.855397
+            z: 0.000845153
         action:
             a: end
             d: 2147483647
             f: none
         orientation:
-            x: -7.7949e-06
-            y: -3.2368e-06
-            z: 0.999748
-            w: -0.0224693
-    - point:
-        pose:
-            x: 0.33506
-            y: 1.50245
-            z: 0.00413872
-        action:
-            a: start
-            d: 2147483647
-            f: none
-        orientation:
-            x: 2.06616e-06
-            y: 1.51675e-06
-            z: 0.999836
-            w: -0.0184797
-    - point:
-        pose:
-            x: -0.926118
-            y: 1.40753
-            z: 0.00299875
-        action:
-            a: pass
-            d: 2147483647
-            f: none
-        orientation:
-            x: -1.9499e-06
-            y: 6.67902e-07
-            z: -0.752038
-            w: 0.659123
-    - point:
-        pose:
-            x: -0.950229
-            y: 0.300899
-            z: 0.00241669
-        action:
-            a: end
-            d: 2147483647
-            f: none
-        orientation:
-            x: 4.57094e-06
-            y: 8.38212e-06
-            z: 0.0260409
-            w: 0.999662
+            x: 2.73349e-06
+            y: 9.70329e-06
+            z: -0.606099
+            w: 0.795392
 finish_pose:
     header:
         seq: 0
@@ -90,11 +90,11 @@ finish_pose:
         frame_id: 
     pose:
         position:
-            x: 1.05589
-            y: 0.282317
-            z: -1.79066e-05
+            x: -0.694025
+            y: 4.07392
+            z: 8.73239e-06
         orientation:
-            x: -6.34275e-06
-            y: -8.34039e-06
-            z: 0.464186
-            w: 0.885739
+            x: -1.32297e-06
+            y: 1.94254e-07
+            z: -0.326943
+            w: -0.945045
