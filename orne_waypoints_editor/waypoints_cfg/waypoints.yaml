@@ -1,9 +1,9 @@
 waypoints:
     - point:
         pose:
-            x: 0.341916
-            y: 2.04301
-            z: 0.00407764
+            x: 0.599899
+            y: -0.44316
+            z: 0.00407725
         action:
             a: passthrough
             d: 0
@@ -15,9 +15,9 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: 0.235343
-            y: 2.95583
-            z: 0.0040776
+            x: 1.8466
+            y: -0.467796
+            z: 0.0040787
         action:
             a: passthrough
             d: 0
@@ -29,9 +29,9 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: -0.858247
-            y: 2.99899
-            z: 0.00475969
+            x: 1.86745
+            y: 0.891047
+            z: 0.00477187
         action:
             a: passthrough
             d: 0
@@ -43,23 +43,23 @@ waypoints:
             w: 0.00179408
     - point:
         pose:
-            x: -0.851317
-            y: 2.5177
-            z: 0.00254056
+            x: 1.16048
+            y: 0.748008
+            z: 0.00237655
         action:
             a: align2
             d: 2147483647
             f: none
         orientation:
-            x: -3.59675e-06
-            y: -1.7913e-05
-            z: 0.689747
-            w: -0.724065
+            x: -5.4341e-07
+            y: 5.24917e-06
+            z: 0.353874
+            w: 0.935293
     - point:
         pose:
-            x: -1.21466
-            y: 1.43646
-            z: -0.00157176
+            x: 0.182481
+            y: 1.21092
+            z: -0.00157257
         action:
             a: passthrough
             d: 0
@@ -71,9 +71,9 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: -1.15005
-            y: 0.301812
-            z: -0.00157151
+            x: -1.00811
+            y: 1.12168
+            z: -0.00157165
         action:
             a: passthrough
             d: 0
@@ -85,9 +85,9 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: -0.016075
-            y: 0.331113
-            z: -0.00118571
+            x: -0.991283
+            y: -0.110198
+            z: -0.00118647
         action:
             a: passthrough
             d: 0
@@ -99,18 +99,18 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: -0.0729182
-            y: 0.958992
-            z: 0.0457999
+            x: -0.337312
+            y: -0.0645911
+            z: -0.00118562
         action:
             a: align1
             d: 2147483647
             f: none
         orientation:
-            x: -1.4562e-05
-            y: 1.23489e-05
-            z: -0.718965
-            w: -0.695047
+            x: 1.18587e-05
+            y: 1.58092e-05
+            z: -0.246975
+            w: 0.969022
 finish_pose:
     header:
         seq: 0
