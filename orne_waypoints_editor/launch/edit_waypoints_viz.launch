@@ -3,7 +3,7 @@
 <launch>
   <arg name="lang"              default="eng"/>
   <!-- <arg name="map_file" default="$(find limo_bringup)/maps/limo_map.yaml"/> -->
-  <arg name="waypoints_file" default="$(find orne_waypoints_editor)/waypoints_cfg/waypoints.yaml"/>
+  <arg name="waypoints_file" default="$(find tsac_planner)/waypoints/waypoints.yaml"/>
   <!-- <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)"/> -->
   
   <node pkg="orne_waypoints_editor" name="orne_waypoints_editor" type="orne_waypoints_editor" output="screen">

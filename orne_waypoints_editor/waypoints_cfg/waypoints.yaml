@@ -85,9 +85,9 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: -0.991283
-            y: -0.110198
-            z: -0.00118647
+            x: -0.979176
+            y: -0.0421749
+            z: -0.00118683
         action:
             a: passthrough
             d: 0
@@ -99,18 +99,18 @@ waypoints:
             w: 1
     - point:
         pose:
-            x: -0.337312
-            y: -0.0645911
-            z: -0.00118562
+            x: -0.323403
+            y: -0.0421568
+            z: -0.00118532
         action:
             a: align1
             d: 2147483647
             f: none
         orientation:
-            x: 1.18587e-05
-            y: 1.58092e-05
-            z: -0.246975
-            w: 0.969022
+            x: 1.20956e-05
+            y: -1.22586e-05
+            z: 0.83121
+            w: 0.55596
 finish_pose:
     header:
         seq: 0
